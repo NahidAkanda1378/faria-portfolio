@@ -1,0 +1,212 @@
+.section {
+  background: var(--white);
+  padding: var(--section-gap) 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Graph paper grid subtle */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.section::after {
+  content: '∫        ∑        ∇        ∂        α        β\A\A      γ        δ        π        ℝ        ∞\A\A →        ≅        theorem        graph        set\A\A      ℚ        ∴        ∎        logic';
+  position: absolute;
+  inset: -9% -10% auto -7%;
+  color: rgba(1,31,75,0.105);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.05rem, 2.45vw, 2.2rem);
+  letter-spacing: clamp(0.38rem, 1.4vw, 1.25rem);
+  line-height: 1.75;
+  pointer-events: none;
+  white-space: pre;
+  z-index: 0;
+  will-change: transform;
+  animation: symbolDrift 9s ease-in-out infinite alternate;
+}
+
+.inner { max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
+
+.header {
+  margin-bottom: 24px;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.header.vis { opacity: 1; transform: none; }
+.header:hover .label { color: var(--teal-soft); }
+.header:hover .heading { transform: translateY(-2px); }
+.header:hover .heading::after { opacity: 1; transform: scaleX(1); }
+
+.label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 10px;
+  transition: color 0.25s ease;
+}
+
+.heading {
+  position: relative;
+  display: inline-block;
+  font-family: 'Lora', serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.08;
+  transition: transform 0.25s ease;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: min(120px, 42%);
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--teal-deep), var(--teal-soft), var(--teal-pale));
+  opacity: 0.58;
+  transform: scaleX(0.42);
+  transform-origin: left;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+.sub {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-light);
+}
+
+.cards { display: flex; flex-direction: column; gap: 12px; }
+
+.card {
+  display: flex;
+  gap: 18px;
+  padding: clamp(16px, 2vw, 20px);
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--grid);
+  box-shadow: 0 2px 12px rgba(17,19,24,0.04);
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.25s, border-color 0.25s, background 0.25s;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, rgba(179,205,224,0.25) 42%, transparent 58%);
+  transform: translateX(-120%);
+  transition: transform 0.75s ease;
+  pointer-events: none;
+}
+.card.vis { opacity: 1; transform: none; }
+.card:hover {
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 16px 40px rgba(1,31,75,0.1);
+  border-color: rgba(0,91,150,0.34);
+  transform: translateY(-3px);
+}
+.card:hover::before { transform: translateX(120%); }
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--cobalt-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cobalt);
+  line-height: 1;
+}
+
+.body { flex: 1; }
+
+.role {
+  font-family: 'Lora', serif;
+  font-size: clamp(0.98rem, 1.7vw, 1.1rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.org {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--cobalt);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  margin-bottom: 10px;
+}
+
+.courses { display: flex; flex-direction: column; gap: 6px; }
+
+.course {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--cobalt-dim);
+  border-radius: 4px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.courseName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.coursePeriod {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--ink-light);
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+  .section { padding: var(--section-gap) 20px; }
+  .header { margin-bottom: 24px; }
+  .card { flex-direction: column; gap: 16px; }
+  .course { align-items: flex-start; }
+}
+
+@keyframes symbolDrift {
+  from { transform: translate3d(-42px, 40px, 0); }
+  to { transform: translate3d(58px, -18px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section::after {
+    animation: none;
+  }
+}

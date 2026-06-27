@@ -1,0 +1,59 @@
+.footer {
+  background: var(--teal-deep);
+  border-top: 1px solid var(--warm-line);
+  padding: 36px 32px;
+}
+
+.inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.logoIcon {
+  width: 1em !important;
+  height: 1em !important;
+  max-width: 1em;
+  max-height: 1em;
+  flex: 0 0 1em;
+  object-fit: contain;
+}
+
+.name {
+  font-family: 'Lora', serif;
+  font-size: 1em;
+  font-weight: 600;
+  color: white;
+}
+
+.text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(248,248,246,0.34);
+  letter-spacing: 0.04em;
+}
+
+.link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--teal-pale);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.link:hover { color: white; }
+
+@media (max-width: 640px) {
+  .footer { padding: 28px 24px; }
+  .inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

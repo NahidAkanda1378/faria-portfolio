@@ -1,0 +1,326 @@
+.section {
+  background:
+    linear-gradient(var(--page-tint), var(--page-tint)),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    var(--white);
+  background-size: auto, 48px 48px, 48px 48px, auto;
+  padding: var(--section-gap) 32px;
+  overflow: hidden;
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: auto -12% -35% 58%;
+  height: 420px;
+  background: radial-gradient(circle, rgba(0,91,150,0.12), transparent 62%);
+  pointer-events: none;
+  animation: softDrift 9s ease-in-out infinite alternate;
+}
+
+.section::after {
+  content: 'λ        μ        σ        τ        χ        ψ\A\A      ∫        ∑        ∆        ∇        mod\A\A rank        matrix        basis        ker        im\A\A      Φ        ℝ        ℤ        α';
+  position: absolute;
+  inset: -9% -10% auto -7%;
+  color: rgba(1,31,75,0.12);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.05rem, 2.45vw, 2.2rem);
+  letter-spacing: clamp(0.38rem, 1.4vw, 1.25rem);
+  line-height: 1.75;
+  pointer-events: none;
+  white-space: pre;
+  z-index: 0;
+  will-change: transform;
+  animation: symbolDrift 9s ease-in-out infinite alternate;
+}
+
+.inner { max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
+
+.header {
+  margin-bottom: 24px;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.header.vis { opacity: 1; transform: none; }
+.header:hover .label { color: var(--teal); }
+.header:hover .heading { transform: translateY(-2px); }
+.header:hover .heading::after { opacity: 1; transform: scaleX(1); }
+
+.label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-soft);
+  margin-bottom: 10px;
+  transition: color 0.25s ease;
+}
+
+.heading {
+  position: relative;
+  display: inline-block;
+  font-family: 'Lora', serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.08;
+  transition: transform 0.25s ease;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: min(120px, 42%);
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--teal-deep), var(--teal-soft), var(--teal-pale));
+  opacity: 0.58;
+  transform: scaleX(0.42);
+  transform-origin: left;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.block {
+  background: rgba(255,255,255,0.76);
+  border: 1px solid rgba(100,151,177,0.22);
+  border-radius: 8px;
+  padding: clamp(16px, 2vw, 20px);
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, rgba(179,205,224,0.25) 42%, transparent 58%);
+  transform: translateX(-120%);
+  transition: transform 0.75s ease;
+  pointer-events: none;
+}
+.block.vis { opacity: 1; transform: none; animation: cardRise 0.55s ease both; }
+.block:hover {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,91,150,0.34);
+  box-shadow: 0 18px 42px rgba(1,31,75,0.1);
+  transform: translateY(-3px);
+}
+.block:hover::before { transform: translateX(120%); }
+
+.blockTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.blockIcon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--teal-soft);
+}
+
+/* Technical skills */
+.techList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.techItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 9px 10px;
+  border: 1px solid rgba(100,151,177,0.2);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.62);
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+
+.techItem:hover {
+  transform: translateY(-2px);
+  background: rgba(179,205,224,0.26);
+  border-color: rgba(0,91,150,0.34);
+}
+
+.techMark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(0,91,150,0.15), rgba(100,151,177,0.26));
+  color: var(--teal-deep);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.techText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.techName {
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.techType {
+  color: var(--ink-light);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Leadership */
+.leaderList { display: flex; flex-direction: column; gap: 8px; }
+.leaderItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 9px 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.58);
+  transition: background 0.2s;
+}
+.leaderItem:hover { background: rgba(179,205,224,0.24); transform: translateX(3px); }
+.leaderIcon {
+  font-size: 1.1rem;
+  color: var(--teal-soft);
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.leaderRole {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.leaderOrg {
+  font-size: 0.74rem;
+  color: var(--ink-mid);
+  font-style: italic;
+  margin-top: 2px;
+}
+.leaderPeriod {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--teal-soft);
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* Certs */
+.certList { display: flex; flex-direction: column; gap: 8px; }
+.cert {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.58);
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.2s;
+}
+.cert:hover { background: rgba(179,205,224,0.24); transform: translateX(3px); }
+.certIcon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  color: var(--teal-soft);
+  flex-shrink: 0;
+}
+.certName {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.certIssuer {
+  font-size: 0.74rem;
+  color: var(--ink-mid);
+  font-style: italic;
+  margin-top: 3px;
+}
+.certYear {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--teal-soft);
+  margin-top: 4px;
+}
+
+/* Interests */
+.interests { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.interest {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: rgba(255,255,255,0.58);
+  border-radius: 6px;
+  border: 1px solid rgba(100,151,177,0.2);
+  transition: border-color 0.2s, background 0.2s;
+}
+.interest:hover { border-color: var(--teal-soft); background: rgba(179,205,224,0.24); transform: translateY(-2px); }
+.interestIcon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  color: var(--teal-soft);
+}
+.interestName {
+  font-size: 0.85rem;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .section { padding: var(--section-gap) 20px; }
+  .header { margin-bottom: 24px; }
+  .techList { grid-template-columns: 1fr; }
+  .interests { grid-template-columns: 1fr; }
+}
+
+@keyframes cardRise {
+  from { transform: translateY(10px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes softDrift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-8%, -8%, 0) scale(1.08); }
+}
+
+@keyframes symbolDrift {
+  from { transform: translate3d(-44px, -18px, 0); }
+  to { transform: translate3d(56px, 42px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section::before,
+  .section::after,
+  .block.vis {
+    animation: none;
+  }
+}
